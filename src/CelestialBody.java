@@ -2,7 +2,7 @@
 
 /**
  * Celestial Body class for NBody
- * @author ola
+ * @author Kadriye Sude Almus
  *
  */
 public class CelestialBody {
@@ -68,11 +68,21 @@ public class CelestialBody {
 		// TODO: complete method
 		return myYVel;
 	}
-	
+	/**
+	 * Return mass of this Body.
+	 * @return value of mass.
+	 */
+
 	public double getMass() {
 		// TODO: complete method
 		return myMass;
 	}
+
+	/**
+	 * Return file name of this Body.
+	 * @return value of file name.
+	 */
+
 	public String getName() {
 		// TODO: complete method
 		return myFileName;
@@ -90,11 +100,23 @@ public class CelestialBody {
 		return Math.sqrt(rsq);
 	}
 
+	/**
+	 * Return the force exerted by another body on this body
+	 * @param b the other body that exerts force
+	 * @return force exerted by b on this body
+	 */
+
 	public double calcForceExertedBy(CelestialBody b) {
 		double g = 6.67*1e-11;
 		double rsq = calcDistance(b) * calcDistance(b);
 		return (g * myMass * b.getMass()) / rsq;
 	}
+
+	/**
+	 * Return the force exerted in the x direction by another body on this body
+	 * @param b the other body that exerts force
+	 * @return force exerted by b on this body in the x direction
+	 */
 
 	public double calcForceExertedByX(CelestialBody b) {
 		double dx = b.getX() - myXPos;
@@ -102,12 +124,25 @@ public class CelestialBody {
 		double r = calcDistance(b);
 		return f * dx / r;
 	}
+
+	/**
+	 * Return the force exerted in the y direction by another body on this body
+	 * @param b the other body that exerts force
+	 * @return force exerted by b on this body in the y direction
+	 */
+
 	public double calcForceExertedByY(CelestialBody b) {
 		double dy = b.getY() - myYPos;
 		double f = calcForceExertedBy(b);
 		double r = calcDistance(b);
 		return f * dy / r;
 	}
+
+	/**
+	 * Return the net force exerted in the x direction by all other bodies on this body
+	 * @param bodies array of all celestial bodies in the data
+	 * @return force exerted by bodies on this body in the x direction
+	 */
 
 	public double calcNetForceExertedByX(CelestialBody[] bodies) {
 		double sum = 0.0;
@@ -119,6 +154,12 @@ public class CelestialBody {
 		return sum;
 	}
 
+	/**
+	 * Return the net force exerted in the y direction by all other bodies on this body
+	 * @param bodies array of all celestial bodies in the data
+	 * @return force exerted by bodies on this body in the y direction
+	 */
+
 	public double calcNetForceExertedByY(CelestialBody[] bodies) {
 		double sum = 0.0;
 		for (CelestialBody b: bodies) {
@@ -128,6 +169,14 @@ public class CelestialBody {
 		}
 		return sum;
 	}
+
+	/**
+	 * Updates the x-position, y-position, x-velocity, and y-velocity of the body
+	 * @param deltaT change in time
+	 * @param xforce force exerted in the x direction on the body
+	 * @param yforce force exerted in the y direction on the body
+	 */
+
 
 	public void update(double deltaT, 
 			           double xforce, double yforce) {
